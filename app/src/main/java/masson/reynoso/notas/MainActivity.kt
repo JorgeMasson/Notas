@@ -1,8 +1,10 @@
 package masson.reynoso.notas
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ListView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
     var notas = ArrayList<Nota>()
@@ -13,7 +15,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        notasDePrueba()
+        val fab: FloatingActionButton = findViewById(R.id.fab)
+
+        fab.setOnClickListener {
+            var intent = Intent(this, AgregarNotaActivity::class.java)
+            startActivityForResult(intent, 123)
+        }
 
         adaptador = AdaptadorNotas(this, notas)
         listvView.adapter = adaptador
