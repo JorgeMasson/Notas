@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.Button
+import android.widget.TextView
 
 class AdaptadorNotas: BaseAdapter {
     var context: Context
@@ -33,8 +34,8 @@ class AdaptadorNotas: BaseAdapter {
         var vista = inflador.inflate(R.layout.nota_layout, null)
         var nota = notas[position]
 
-        vista.tv_titulo_det.text = nota.titulo
-        vista.tv_contenido_det.text = nota.contenido
+        val tv_titulo_det: TextView = vista.findViewById(R.id.tv_titulo_det)
+        val tv_contenido_det: TextView = vista.findViewById(R.id.tv_contenido_det)
 
         return vista
     }
