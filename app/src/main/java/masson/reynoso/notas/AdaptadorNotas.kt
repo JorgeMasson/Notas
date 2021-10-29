@@ -1,12 +1,14 @@
 package masson.reynoso.notas
 
 import android.content.Context
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.Button
 
 class AdaptadorNotas: BaseAdapter {
-    lateinit var context: Context
+    var context: Context
     var notas = ArrayList<Nota>()
 
     constructor(context: Context, notas: ArrayList<Nota>) {
@@ -27,7 +29,14 @@ class AdaptadorNotas: BaseAdapter {
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        TODO("Not yet implemented")
+        var inflador = LayoutInflater.from(context)
+        var vista = inflador.inflate(R.layout.nota_layout, null)
+        var nota = notas[position]
+
+        vista.tv_titulo_det.text = nota.titulo
+        vista.tv_contenido_det.text = nota.contenido
+
+        return vista
     }
 
 }
