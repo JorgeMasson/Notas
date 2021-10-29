@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ListView
@@ -12,6 +13,8 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.util.jar.Manifest
+import java.io.File as File
+import java.io.FileOutputStream as FileOutputStream
 
 
 class AgregarNotaActivity : AppCompatActivity() {
@@ -56,9 +59,36 @@ class AgregarNotaActivity : AppCompatActivity() {
     public fun guardar() {
         var titulo: EditText = findViewById(R.id.et_titulo)
         var cuerpo: EditText = findViewById(R.id.et_contenido)
+        var tituloStr: String = titulo.text.toString()
+        var cuerpoStr: String = cuerpo.text.toString()
 
-        titulo.text.toString()
-        cuerpo.text.toString()
+        if (tituloStr == "" || cuerpoStr == "") {
+            Toast.makeText(this, "Error: campos vacíos", Toast.LENGTH_SHORT).show()
+        } else {
+            try {
+                val archivo: File = File(ubicacion(), tituloStr + ".txt")
+                val fos = FileOutputStream(archivo)
+                fos.write(cuerpoStr.toByteArray())
+                fos.close()
+                Toast.makeText(
+                    this,
+                    "se guardó el archivo en la carpeta pública",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }catch (e: Exception) {
+                Toast.makeText(this, "Error: no se guardó el archivo", Toast.LENGTH_SHORT).show()
+            }
+        }
+        finish()
+    }
+
+    private fun ubicacion(): String {
+        val carpeta = File(getExternalFilesDir(null), "notas")
+        if (!carpeta.exists()) {
+            carpeta.mkdir()
+        }
+
+        return carpeta.absolutePath
     }
 
 }
