@@ -12,12 +12,13 @@ import java.io.FileOutputStream as FileOutputStream
 class MainActivity : AppCompatActivity() {
     var notas = ArrayList<Nota>()
     lateinit var adaptador: AdaptadorNotas
-    var listvView: ListView = findViewById(R.id.listview)
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        var listvView: ListView = findViewById(R.id.listview)
         val fab: FloatingActionButton = findViewById(R.id.fab)
 
         fab.setOnClickListener {
