@@ -38,6 +38,9 @@ class AdaptadorNotas: BaseAdapter {
         val tv_contenido_det: TextView = vista.findViewById(R.id.tv_contenido_det)
         val btn_borrar: ImageView = vista.findViewById(R.id.btn_borrar)
 
+        tv_titulo_det.text = nota.titulo
+        tv_contenido_det.text = nota.contenido
+
         btn_borrar.setOnClickListener {
             eliminar(nota.titulo)
             notas.remove(nota)
